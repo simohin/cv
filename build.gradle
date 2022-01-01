@@ -1,7 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.6.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'com.vaadin' version '0.14.8.1'
+    id 'com.vaadin' version '22.0.2'
     id 'java'
 }
 
@@ -14,7 +14,8 @@ repositories {
 }
 
 ext {
-    set('vaadinVersion', '14.8.0')
+    set('vaadinVersion', '22.0.2')
+    set('springBootVersion', '2.6.2')
 }
 tasks {
     jar.enabled = false
@@ -26,8 +27,8 @@ vaadin {
 
 dependencies {
     implementation 'com.vaadin:vaadin-spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-devtools'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }
 
 dependencyManagement {
