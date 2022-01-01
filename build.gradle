@@ -33,21 +33,6 @@ dependencyManagement {
     }
 }
 
-task moveJar(type: Copy, dependsOn: [clean, build]) {
-    from jar.archiveFile
-    into project.rootDir
-    rename {
-        'app.jar'
-    }
-}
-moveJar.mustRunAfter(clean)
-
-clean {
-    doLast {
-        project.file('app.jar').delete()
-    }
-}
-
 test {
     useJUnitPlatform()
 }
