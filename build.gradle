@@ -21,7 +21,7 @@ tasks {
     bootJar.enabled = true
 }
 vaadin {
-    productionMode = java.util.Optional.ofNullable(System.getenv("VAADIN_PROD_MODE")).map(Boolean::parseBoolean).orElse(false)
+    productionMode = System.getenv("VAADIN_PROD_MODE")
 }
 
 dependencies {
