@@ -33,14 +33,14 @@ dependencyManagement {
     }
 }
 
-task stage(type: Copy, dependsOn: [clean, build]) {
+task moveJar(type: Copy, dependsOn: [clean, build]) {
     from jar.archiveFile
     into project.rootDir
     rename {
         'app.jar'
     }
 }
-stage.mustRunAfter(clean)
+moveJar.mustRunAfter(clean)
 
 clean {
     doLast {
