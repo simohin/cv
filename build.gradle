@@ -14,14 +14,14 @@ repositories {
 }
 
 ext {
-    set('vaadinVersion', '22.0.2')
+    set('vaadinVersion', '14.8.0')
 }
 tasks {
     jar.enabled = false
     bootJar.enabled = true
 }
 vaadin {
-    productionMode = true
+    productionMode = java.util.Optional.ofNullable(System.getenv("VAADIN_PROD_MODE")).map(Boolean::parseBoolean).orElse(false)
 }
 
 dependencies {
