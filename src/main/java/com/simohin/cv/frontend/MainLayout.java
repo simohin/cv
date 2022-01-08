@@ -6,6 +6,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@UIScope
 public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
 
     private static final String TITLE_TEXT = "Тимофей Симохин";

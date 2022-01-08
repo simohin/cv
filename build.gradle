@@ -16,6 +16,7 @@ repositories {
 ext {
     set('vaadinVersion', '22.0.2')
     set('springBootVersion', '2.6.2')
+    set('lombokVersion', '1.18.22')
 }
 tasks {
     jar.enabled = false
@@ -28,6 +29,11 @@ vaadin {
 dependencies {
     implementation 'com.vaadin:vaadin-spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-devtools'
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
