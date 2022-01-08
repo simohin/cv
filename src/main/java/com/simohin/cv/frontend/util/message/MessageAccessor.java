@@ -3,12 +3,18 @@ package com.simohin.cv.frontend.util.message;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Locale;
 
 public class MessageAccessor {
 
+    private static final Collection<String> BASE_NAMES = new HashSet<>() {{
+        add("messages/title");
+    }};
+
     private static final MessageSource MESSAGE_SOURCE = new ResourceBundleMessageSource() {{
-        setBasenames("messages/title");
+        setBasenames(BASE_NAMES.toArray(new String[]{}));
         setUseCodeAsDefaultMessage(true);
     }};
 
