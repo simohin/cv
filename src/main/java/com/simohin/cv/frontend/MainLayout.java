@@ -17,7 +17,7 @@ import java.util.Map;
 @UIScope
 public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
 
-    private static final String TITLE_TEXT = "Тимофей Симохин";
+    private static final String TITLE_TEXT = "Simohin Timofey";
     private static final Map<String, String> TITLE_CUSTOM_STYLES = new HashMap<>() {{
         put("margin", "0.5em");
         put("align-self", "center");
