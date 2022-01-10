@@ -1,12 +1,12 @@
 package com.simohin.cv.frontend;
 
 import com.simohin.cv.frontend.view.View;
+import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.stereotype.Component;
@@ -39,6 +39,8 @@ public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
         tabs = getTabs();
         placeholder = getPlaceholder();
         addToNavbar(getWrapper());
+        setDrawerOpened(false);
+        addToDrawer(tabs);
     }
 
     private H3 getTitle() {
@@ -58,9 +60,8 @@ public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
                         }
                     })
                     .forEach(this::add);
-            getStyle().set("flex-grow", String.valueOf(TABS_FLEX_GROW));
             selectTab(getSelectedTab());
-            addThemeVariants(TabsVariant.LUMO_EQUAL_WIDTH_TABS);
+            setOrientation(Orientation.VERTICAL);
             addSelectedChangeListener(MainLayout.this::handleSelectedChanged);
         }};
     }
@@ -84,7 +85,7 @@ public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
     }
 
     private HorizontalLayout getWrapper() {
-        return new HorizontalLayout(title, placeholder, tabs) {{
+        return new HorizontalLayout(title, placeholder, new DrawerToggle()) {{
             setWidthFull();
             setJustifyContentMode(JustifyContentMode.BETWEEN);
         }};
