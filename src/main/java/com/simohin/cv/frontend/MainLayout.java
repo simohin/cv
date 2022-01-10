@@ -7,16 +7,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Component
+@Route("")
 @UIScope
 public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
 
@@ -29,13 +27,14 @@ public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
     public static final float PLACEHOLDER_FLEX_GROW = 7;
     public static final float TABS_FLEX_GROW = 1;
     public static final float LOGO_FLEX_GROW = 1;
+    public static final String DEFAULT_TAB = "Main";
     private final H3 title;
     private final Tabs tabs;
     private final Div placeholder;
-    private final Map<String, View> nameToView;
+    private final Map<String, View> nameToView = new LinkedHashMap<>();
 
-    public MainLayout(Collection<View> views) {
-        nameToView = views.stream().collect(Collectors.toMap(View::getName, it -> it));
+    public MainLayout(List<View> views) {
+        views.forEach(it -> nameToView.putIfAbsent(it.getName(), it));
         title = getTitle();
         tabs = getTabs();
         placeholder = getPlaceholder();
@@ -53,16 +52,26 @@ public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
         return new Tabs() {{
             nameToView.keySet().stream()
                     .map(Tab::new)
+                    .peek(it -> {
+                        if (it.getLabel().equalsIgnoreCase(DEFAULT_TAB)) {
+                            it.setSelected(true);
+                        }
+                    })
                     .forEach(this::add);
             getStyle().set("flex-grow", String.valueOf(TABS_FLEX_GROW));
+            selectTab(getSelectedTab());
             addThemeVariants(TabsVariant.LUMO_EQUAL_WIDTH_TABS);
-            addSelectedChangeListener(MainLayout.this::setSelectedTab);
+            addSelectedChangeListener(MainLayout.this::handleSelectedChanged);
         }};
     }
 
 
-    private void setSelectedTab(Tabs.SelectedChangeEvent e) {
-        var component = Optional.ofNullable(nameToView.get(e.getSelectedTab().getLabel()))
+    private void handleSelectedChanged(Tabs.SelectedChangeEvent e) {
+        selectTab(e.getSelectedTab());
+    }
+
+    private void selectTab(Tab tab) {
+        var component = Optional.ofNullable(nameToView.get(tab.getLabel()))
                 .map(com.vaadin.flow.component.Component.class::cast)
                 .orElseThrow();
         setContent(component);
