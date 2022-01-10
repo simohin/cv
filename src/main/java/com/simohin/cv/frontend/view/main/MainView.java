@@ -6,20 +6,20 @@ import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
-@Component(MainView.COMPONENT_NAME)
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@SpringComponent(MainView.COMPONENT_NAME)
 @UIScope
 public class MainView extends VerticalLayout implements View {
 
+    public static final String AVATAR_IMAGE_URL = "/images/avatar.jpg";
     protected static final String COMPONENT_NAME = "Main";
     protected static final String CONTENT_TITLE = "Your heartwarming Java/Kotlin developer";
     protected static final String CONTENT_SUBTITLE = "Goal-focused and inspired to make this world better";
-    public static final String AVATAR_IMAGE_URL = "/images/avatar.jpg";
 
     public MainView() {
         setSizeFull();

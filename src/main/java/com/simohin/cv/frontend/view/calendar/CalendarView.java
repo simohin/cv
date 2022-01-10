@@ -1,13 +1,13 @@
-package com.simohin.cv.frontend.view.main;
+package com.simohin.cv.frontend.view.calendar;
 
 import com.simohin.cv.frontend.view.View;
 import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component(CalendarView.COMPONENT_NAME)
+@SpringComponent(CalendarView.COMPONENT_NAME)
 @UIScope
 public class CalendarView extends VerticalLayout implements View {
 

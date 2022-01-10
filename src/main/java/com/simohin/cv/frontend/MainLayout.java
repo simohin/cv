@@ -8,14 +8,16 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 
-@Component
-@UIScope
+@SpringComponent
 @Route("")
+@UIScope
 public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
 
     private static final String TITLE_TEXT = "Simohin Timofey";
@@ -27,11 +29,14 @@ public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
         put("flex-grow", String.valueOf(LOGO_FLEX_GROW));
     }};
     private static final String DEFAULT_TAB = "Main";
-    private final H3 title;
-    private final Div placeholder;
     private final Map<String, View> nameToView = new LinkedHashMap<>();
+    @Autowired
+    private List<View> views;
+    private H3 title;
+    private Div placeholder;
 
-    public MainLayout(List<View> views) {
+    @PostConstruct
+    public void init() {
         views.forEach(it -> nameToView.putIfAbsent(it.getName(), it));
         title = getTitle();
         placeholder = getPlaceholder();
