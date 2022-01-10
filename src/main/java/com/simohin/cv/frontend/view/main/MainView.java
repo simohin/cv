@@ -31,12 +31,12 @@ public class MainView extends VerticalLayout implements View {
         add(
                 new VerticalLayout(getAvatar(), getContentTitle(), getContentSubtitle()) {{
                     setWidthFull();
-                    setHeight(0.8f, Unit.VMAX);
                     setAlignItems(Alignment.CENTER);
+                    setFlexGrow(5f);
                 }},
                 new VerticalLayout() {{
                     setWidthFull();
-                    setHeight(0.2f, Unit.VMAX);
+                    setFlexGrow(1f);
                 }}
         );
     }
@@ -51,14 +51,16 @@ public class MainView extends VerticalLayout implements View {
 
     private com.vaadin.flow.component.Component getContentTitle() {
         return new H1(CONTENT_TITLE) {{
-            getStyle().set("margin", "0");
+            getStyle().set("margin", "0")
+                    .set("text-align", "center");
         }};
     }
 
     private com.vaadin.flow.component.Component getContentSubtitle() {
         return new H4(CONTENT_SUBTITLE) {{
             getStyle().set("margin-top", "0.2em")
-                    .set("color", "var(--lumo-secondary-text-color)");
+                    .set("color", "var(--lumo-secondary-text-color)")
+                    .set("text-align", "center");
         }};
     }
 
