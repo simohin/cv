@@ -5,6 +5,7 @@ import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.UIScope;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component(CalendarView.COMPONENT_NAME)
@@ -13,18 +14,22 @@ public class CalendarView extends VerticalLayout implements View {
 
     protected static final String COMPONENT_NAME = "Calendar";
 
-    public CalendarView() {
+    private String src;
+
+    public CalendarView(@Value("${view.calendar.calendly.src}") String src) {
+        this.src = src;
         setSizeFull();
         add(getCalendlyIframe());
     }
 
     private IFrame getCalendlyIframe() {
         return new IFrame() {{
+            setSpacing(false);
             setPadding(false);
             setMargin(false);
             getStyle().set("overflow", "hidden");
             getElement().setAttribute("frameborder", "0").setAttribute("scrolling", "no");
-            setSrc("https://calendly.com/simohin_timofei/30min?embed_type=Inline&hide_gdpr_banner=1");
+            setSrc(src);
             setSizeFull();
         }};
     }
