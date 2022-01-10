@@ -14,33 +14,30 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-@Route("")
 @UIScope
+@Route("")
 public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
 
     private static final String TITLE_TEXT = "Simohin Timofey";
+    private static final float PLACEHOLDER_FLEX_GROW = 7;
+    private static final float LOGO_FLEX_GROW = 1;
     private static final Map<String, String> TITLE_CUSTOM_STYLES = new HashMap<>() {{
         put("margin", "0.5em");
         put("align-self", "center");
         put("flex-grow", String.valueOf(LOGO_FLEX_GROW));
     }};
-    public static final float PLACEHOLDER_FLEX_GROW = 7;
-    public static final float TABS_FLEX_GROW = 1;
-    public static final float LOGO_FLEX_GROW = 1;
-    public static final String DEFAULT_TAB = "Main";
+    private static final String DEFAULT_TAB = "Main";
     private final H3 title;
-    private final Tabs tabs;
     private final Div placeholder;
     private final Map<String, View> nameToView = new LinkedHashMap<>();
 
     public MainLayout(List<View> views) {
         views.forEach(it -> nameToView.putIfAbsent(it.getName(), it));
         title = getTitle();
-        tabs = getTabs();
         placeholder = getPlaceholder();
         addToNavbar(getWrapper());
         setDrawerOpened(false);
-        addToDrawer(tabs);
+        addToDrawer(getTabs());
     }
 
     private H3 getTitle() {

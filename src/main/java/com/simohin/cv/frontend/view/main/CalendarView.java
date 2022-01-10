@@ -1,7 +1,6 @@
 package com.simohin.cv.frontend.view.main;
 
 import com.simohin.cv.frontend.view.View;
-import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.html.IFrame;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -14,7 +13,7 @@ public class CalendarView extends VerticalLayout implements View {
 
     protected static final String COMPONENT_NAME = "Calendar";
 
-    private String src;
+    private final String src;
 
     public CalendarView(@Value("${view.calendar.calendly.src}") String src) {
         this.src = src;
