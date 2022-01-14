@@ -50,7 +50,7 @@ public class MeetingView extends VerticalLayout implements View {
     public MeetingView() {
         setSizeFull();
         setAlignItems(Alignment.CENTER);
-        setJustifyContentMode(JustifyContentMode.AROUND);
+        setJustifyContentMode(JustifyContentMode.CENTER);
         add(
                 new H1(TITLE_TEXT) {{
                     getStyle().set("margin", "0")
