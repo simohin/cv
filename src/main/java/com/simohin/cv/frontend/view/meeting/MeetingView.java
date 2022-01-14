@@ -52,7 +52,10 @@ public class MeetingView extends VerticalLayout implements View {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.AROUND);
         add(
-                new H1(TITLE_TEXT),
+                new H1(TITLE_TEXT) {{
+                    getStyle().set("margin", "0")
+                            .set("text-align", "center");
+                }},
                 new FormLayout() {{
                     add(titleField, meetingStartField, meetingEndField, descriptionField);
                     setMaxWidth(70f, Unit.VH);
