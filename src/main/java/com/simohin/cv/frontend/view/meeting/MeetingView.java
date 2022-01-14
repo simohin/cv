@@ -29,7 +29,7 @@ public class MeetingView extends VerticalLayout implements View {
     private static final LocalDateTime INITIAL_MEETING_START = LocalDateTime.now().plusDays(1);
     private static final LocalDateTime INITIAL_MEETING_END = INITIAL_MEETING_START.plus(STEP);
     private static final String DESCRIPTION_FIELD_LABEL = "Description";
-    private static final String DESCRIPTION_FIELD_PLACEHOLDER = "Add a few word";
+    private static final String DESCRIPTION_FIELD_PLACEHOLDER = "Add a few words";
     private static final String TITLE_TEXT = "Please, pick a time to schedule our wonderful meeting";
     private static final String SUBMIT_BUTTON_TEXT = "Submit";
 
