@@ -1,6 +1,7 @@
 package com.simohin.cv.frontend;
 
 import com.simohin.cv.frontend.view.View;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
@@ -10,7 +11,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -30,16 +31,19 @@ public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
     }};
     private static final String DEFAULT_TAB = "Main";
     private final Map<String, View> nameToView = new LinkedHashMap<>();
-    @Autowired
-    private List<View> views;
-    private H3 title;
-    private Div placeholder;
 
-    @PostConstruct
-    public void init() {
+    private final H3 title;
+    private final Div placeholder;
+
+    public MainLayout(List<View> views) {
+        UI.getCurrent().getElement().getThemeList().add(Lumo.DARK);
         views.forEach(it -> nameToView.putIfAbsent(it.getName(), it));
         title = getTitle();
         placeholder = getPlaceholder();
+    }
+
+    @PostConstruct
+    public void init() {
         addToNavbar(getWrapper());
         setDrawerOpened(false);
         addToDrawer(getTabs());
@@ -87,7 +91,10 @@ public class MainLayout extends com.vaadin.flow.component.applayout.AppLayout {
     }
 
     private HorizontalLayout getWrapper() {
-        return new HorizontalLayout(title, placeholder, new DrawerToggle()) {{
+        return new HorizontalLayout(
+                title,
+                placeholder,
+                new DrawerToggle()) {{
             setWidthFull();
             setJustifyContentMode(JustifyContentMode.BETWEEN);
         }};

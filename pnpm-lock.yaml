@@ -2,6 +2,7 @@ dependencies:
   '@polymer/iron-icon': 3.0.1
   '@polymer/iron-list': 3.1.0
   '@polymer/polymer': 3.2.0
+  '@vaadin-component-factory/vcf-toggle-button': 1.0.3
   '@vaadin/accordion': 22.0.2
   '@vaadin/app-layout': 22.0.2
   '@vaadin/avatar': 22.0.2
@@ -1567,6 +1568,16 @@ packages:
     dev: true
     resolution:
       integrity: sha512-cb+0ioil/7oz5//7tZUSwbrSAN/NWHrQylz5cW8G0dWTcF/g+/dSdMlKVZspBYuMAN1+WnwHrkxiRrLcwd0Heg==
+  /@vaadin-component-factory/vcf-toggle-button/1.0.3:
+    dependencies:
+      '@polymer/polymer': 3.2.0
+      '@vaadin/vaadin-checkbox': 22.0.2
+      '@vaadin/vaadin-element-mixin': 2.4.2
+      '@vaadin/vaadin-lumo-styles': 22.0.2
+      '@vaadin/vaadin-themable-mixin': 22.0.2
+    dev: false
+    resolution:
+      integrity: sha512-fl3QY4odMLv9Uq5TeWXke25XVPcnFP4m2BjOmlAfbP2gIp8I1xXX/Fru3+8NZlZz/pcY+s/v6fuShkkhHoDkmQ==
   /@vaadin/accordion/22.0.2:
     dependencies:
       '@polymer/polymer': 3.2.0
@@ -2308,6 +2319,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-oSKFXqdxuxVrpE91vWlQ8YHoh1xgWUVm9aOWT3MF52Pk8RCqnRzF8qdh1EvReNDXybABTljssoIO0KInFGqrew==
+  /@vaadin/vaadin-element-mixin/2.4.2:
+    dependencies:
+      '@polymer/polymer': 3.2.0
+      '@vaadin/vaadin-development-mode-detector': 2.0.4
+      '@vaadin/vaadin-usage-statistics': 2.1.0
+    dev: false
+    resolution:
+      integrity: sha512-VSDVK0XUsFe/RohpwSzQwgqb2Pwpok6sDNhIDS4CARr3HPhq2voMzT/FowFbkEy0J1hFtN/ZfC7tkv3kdEKKIQ==
   /@vaadin/vaadin-form-layout/22.0.2:
     dependencies:
       '@vaadin/form-layout': 22.0.2
@@ -8650,6 +8669,7 @@ specifiers:
   '@polymer/iron-icon': 3.0.1
   '@polymer/iron-list': 3.1.0
   '@polymer/polymer': 3.2.0
+  '@vaadin-component-factory/vcf-toggle-button': 1.0.3
   '@vaadin/accordion': 22.0.2
   '@vaadin/app-layout': 22.0.2
   '@vaadin/application-theme-plugin': ./build/plugins/application-theme-plugin

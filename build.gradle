@@ -11,12 +11,16 @@ sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
+    maven {
+        url('https://maven.vaadin.com/vaadin-addons')
+    }
 }
 
 ext {
     set('vaadinVersion', '22.0.2')
     set('springBootVersion', '2.6.2')
     set('lombokVersion', '1.18.22')
+    set('componentToggleButtonVersion', '1.0.1')
 }
 tasks {
     jar.enabled = false
@@ -29,6 +33,8 @@ vaadin {
 dependencies {
     implementation 'com.vaadin:vaadin-spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-devtools'
+
+    implementation "com.vaadin.componentfactory:togglebutton:${componentToggleButtonVersion}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
