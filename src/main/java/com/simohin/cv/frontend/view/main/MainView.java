@@ -3,6 +3,7 @@ package com.simohin.cv.frontend.view.main;
 import com.simohin.cv.frontend.component.TimeLineItem;
 import com.simohin.cv.frontend.component.TimeLineItems;
 import com.simohin.cv.frontend.view.View;
+import com.simohin.cv.service.img.ImgUrlService;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.html.H1;
@@ -10,9 +11,12 @@ import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
+import javax.annotation.PostConstruct;
+import java.net.URI;
 import java.util.Set;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -20,13 +24,17 @@ import java.util.Set;
 @UIScope
 public class MainView extends VerticalLayout implements View {
 
+    @Autowired
+    private ImgUrlService imgUrlService;
+
     public static final String AVATAR_IMAGE_URL = "/images/avatar.jpg";
     protected static final String COMPONENT_NAME = "Main";
     protected static final String CONTENT_TITLE = "Your heartwarming Java/Kotlin developer";
     protected static final String CONTENT_SUBTITLE = "Goal-focused and inspired to make this world better";
     private static final String TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-    public MainView() {
+    @PostConstruct
+    public void init() {
         add(getHeroSection(), getTimeLine());
     }
 
@@ -62,7 +70,7 @@ public class MainView extends VerticalLayout implements View {
         return new Avatar() {{
             setHeight(30f, Unit.VH);
             setWidth(30f, Unit.VH);
-            setImage(AVATAR_IMAGE_URL);
+            imgUrlService.getUri("avatar").map(URI::toString).ifPresent(this::setImage);
         }};
     }
 
