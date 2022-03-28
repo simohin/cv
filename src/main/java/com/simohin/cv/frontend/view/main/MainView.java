@@ -3,7 +3,8 @@ package com.simohin.cv.frontend.view.main;
 import com.simohin.cv.frontend.component.TimeLineItem;
 import com.simohin.cv.frontend.component.TimeLineItems;
 import com.simohin.cv.frontend.view.View;
-import com.simohin.cv.service.img.ImgUrlService;
+import com.simohin.cv.service.firestore.img.ImgUrlService;
+import com.simohin.cv.service.firestore.timeline.TimelineService;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.html.H1;
@@ -11,6 +12,7 @@ import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -18,16 +20,17 @@ import org.springframework.core.annotation.Order;
 import javax.annotation.PostConstruct;
 import java.net.URI;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @SpringComponent(MainView.COMPONENT_NAME)
 @UIScope
+@RequiredArgsConstructor
 public class MainView extends VerticalLayout implements View {
 
-    @Autowired
-    private ImgUrlService imgUrlService;
+    private final ImgUrlService imgUrlService;
+    private final TimelineService timelineService;
 
-    public static final String AVATAR_IMAGE_URL = "/images/avatar.jpg";
     protected static final String COMPONENT_NAME = "Main";
     protected static final String CONTENT_TITLE = "Your heartwarming Java/Kotlin developer";
     protected static final String CONTENT_SUBTITLE = "Goal-focused and inspired to make this world better";
@@ -63,7 +66,10 @@ public class MainView extends VerticalLayout implements View {
 
     private VerticalLayout getTimeLine() {
 
-        return new TimeLineItems(Set.of(new TimeLineItem("Title", TEXT)));
+        var items = timelineService.getAll().entrySet().stream()
+                .map(entry -> new TimeLineItem(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toSet());
+        return new TimeLineItems(items);
     }
 
     private com.vaadin.flow.component.Component getAvatar() {

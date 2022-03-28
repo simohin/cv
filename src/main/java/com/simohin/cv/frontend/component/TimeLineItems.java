@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
