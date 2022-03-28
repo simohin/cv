@@ -1,13 +1,18 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.3'
+    id 'org.springframework.boot' version '2.6.5'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'com.vaadin' version '22.0.2'
+    id 'com.vaadin' version '23.0.2'
     id 'java'
 }
 
 group = 'com.simohin'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_17
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 repositories {
     mavenCentral()
@@ -17,8 +22,8 @@ repositories {
 }
 
 ext {
-    set('vaadinVersion', '22.0.4')
-    set('springBootVersion', '2.6.3')
+    set('vaadinVersion', '23.0.2')
+    set('springBootVersion', '2.6.5')
     set('lombokVersion', '1.18.22')
     set('componentToggleButtonVersion', '1.0.1')
     set('firebaseAdminVersion', '8.1.0')

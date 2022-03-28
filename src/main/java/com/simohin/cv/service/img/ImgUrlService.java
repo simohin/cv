@@ -5,6 +5,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.net.URI;
 import java.util.Optional;
@@ -26,6 +27,7 @@ public class ImgUrlService {
         document = collection.document(DOCUMENT_NAME);
     }
 
+    @Cacheable(value = "img.uri", key = "#code")
     public Optional<URI> getUri(String code) {
         Optional<String> uri;
         try {
