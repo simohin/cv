@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @PWA(name = PWAConfig.NAME,
         shortName = PWAConfig.SHORT_NAME,
-        iconPath = "/images/icon.png",
+        iconPath = "classpath:static/images/icon.png",
         startPath = ""
 )
 @Push
